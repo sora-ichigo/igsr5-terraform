@@ -8,4 +8,10 @@ Infrastructure code at igsr5
 
 `aws_s3.tf` - S3 の管理を行う。
 
-`aws_vpc.tf` - vpc の管理を行う。
+`aws_vpc.tf` - VPC の管理を行う。
+
+`aws_lb.tf` - Load balancer の管理を行う。
+
+`aws_acm.tf` - ACM の管理を行う。
+
+`aws_route53.tf` - Route53 の管理を行う。
