@@ -15,3 +15,9 @@ Infrastructure code at igsr5
 `aws_acm.tf` - ACM の管理を行う。
 
 `aws_route53.tf` - Route53 の管理を行う。
+
+`aws_iam.tf` - IAM の管理を行う。
+
+`aws_ecs.tf` - ECS の管理を行う。
+
+`aws_cloud_watch_logs.tf` - CloudWatch Logs の管理を行う。
