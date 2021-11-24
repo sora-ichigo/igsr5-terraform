@@ -19,7 +19,7 @@ resource "aws_ecs_service" "example" {
   desired_count = 2
   launch_type = "FARGATE"
   platform_version = "1.3.0"
-  health_check_grace_period_seconds = 60
+  health_check_grace_period_seconds = 120
 
   network_configuration {
     assign_public_ip = false
@@ -34,10 +34,6 @@ resource "aws_ecs_service" "example" {
     target_group_arn = aws_lb_target_group.example.arn
     container_name = "example"
     container_port = 80
-  }
-
-  lifecycle {
-    ignore_changes = [task_definition]
   }
 }
 
