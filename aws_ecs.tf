@@ -2,6 +2,12 @@ resource "aws_ecs_cluster" "example" {
   name = "example"
 }
 
+/*
+ * 料金の関係で普段は NAT GATEWAY を停止しているが、
+ * タスク定義で docker image pull が必要なので、
+ * タスク定義が更新されるときは、
+ * aws_vpc.tf の NAT GATEWAY 関連のコメントアウトを外す
+ */
 resource "aws_ecs_task_definition" "example" {
   family = "example"
   cpu = "256"

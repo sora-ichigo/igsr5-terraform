@@ -16,6 +16,17 @@
         "protocol": "tcp",
         "containerPort": 80
       }
-    ]
+    ],
+    "secrets": [
+      {
+        "name": "DB_USERNAME",
+        "valueFrom": "/db/username"
+      },
+      {
+        "name": "DB_PASSWORD",
+        "valueFrom": "/db/password"
+      }
+    ],
+    "command": ["/usr/bin/env"]
   }
 ]
