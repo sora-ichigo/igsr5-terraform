@@ -103,7 +103,7 @@ resource "aws_lb_target_group" "example" {
   vpc_id = aws_vpc.example.id
   port = 80
   protocol = "HTTP"
-  deregistration_delay = 300
+  deregistration_delay = 30
 
   health_check {
     path = "/"
