@@ -62,7 +62,7 @@
 # }
 # 
 # module "mysql_sg" {
-#   source = "./security_group"
+#   source = "./modules/security_group"
 #   name = "mysql-sg"
 #   vpc_id = aws_vpc.example.id
 #   port = 3306
