@@ -17,13 +17,13 @@ resource "aws_s3_bucket_policy" "alb_log" {
 
 data "aws_iam_policy_document" "alb_log" {
   statement {
-    effect = "Allow"
-    actions = ["s3:PutObject"]
+    effect    = "Allow"
+    actions   = ["s3:PutObject"]
     resources = ["arn:aws:s3:::${aws_s3_bucket.alb_log.id}/*"]
 
-     principals {
-       type = "AWS"
-       identifiers = ["582318560864"]
-     }
+    principals {
+      type        = "AWS"
+      identifiers = ["582318560864"]
+    }
   }
 }
