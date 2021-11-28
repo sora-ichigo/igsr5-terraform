@@ -22,6 +22,8 @@ Infrastructure code at igsr5
 
 `aws_ecs.tf` - ECS の管理を行う。
 
+`aws_ecs.tf` - ECR の管理を行う。
+
 `aws_cloud_watch_logs.tf` - CloudWatch Logs の管理を行う。
 
 `aws_ssm.tf` - SSM の管理を行う。
