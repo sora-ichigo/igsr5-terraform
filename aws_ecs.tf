@@ -1,5 +1,5 @@
-resource "aws_ecs_cluster" "example" {
-  name = "example"
+resource "aws_ecs_cluster" "igsr5" {
+  name = "igsr5"
 }
 
 /*
@@ -8,8 +8,8 @@ resource "aws_ecs_cluster" "example" {
  * タスク定義が更新されるときは、
  * aws_vpc.tf の NAT GATEWAY 関連のコメントアウトを外す
  */
-resource "aws_ecs_task_definition" "example" {
-  family                   = "example"
+resource "aws_ecs_task_definition" "igsr5" {
+  family                   = "igsr5"
   cpu                      = "256"
   memory                   = "512"
   network_mode             = "awsvpc"
@@ -18,10 +18,10 @@ resource "aws_ecs_task_definition" "example" {
   execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
 }
 
-resource "aws_ecs_service" "example" {
-  name                              = "example"
-  cluster                           = aws_ecs_cluster.example.arn
-  task_definition                   = aws_ecs_task_definition.example.arn
+resource "aws_ecs_service" "igsr5" {
+  name                              = "igsr5"
+  cluster                           = aws_ecs_cluster.igsr5.arn
+  task_definition                   = aws_ecs_task_definition.igsr5.arn
   desired_count                     = 2
   launch_type                       = "FARGATE"
   platform_version                  = "1.3.0"
@@ -31,14 +31,14 @@ resource "aws_ecs_service" "example" {
     assign_public_ip = false
     security_groups  = [module.nginx_sg.security_group_id]
     subnets = [
-      aws_subnet.private_0.id,
-      aws_subnet.private_1.id,
+      aws_subnet.igsr5_private_0.id,
+      aws_subnet.igsr5_private_1.id,
     ]
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.example.arn
-    container_name   = "example"
+    target_group_arn = aws_lb_target_group.igsr5.arn
+    container_name   = "igsr5"
     container_port   = 80
   }
 }
@@ -46,7 +46,7 @@ resource "aws_ecs_service" "example" {
 module "nginx_sg" {
   source      = "./modules/security_group"
   name        = "nginx-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = aws_vpc.igsr5.id
   port        = 80
-  cidr_blocks = [aws_vpc.example.cidr_block]
+  cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }

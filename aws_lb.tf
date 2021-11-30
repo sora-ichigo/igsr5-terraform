@@ -1,13 +1,13 @@
-resource "aws_lb" "example" {
-  name                       = "example"
+resource "aws_lb" "igsr5" {
+  name                       = "igsr5"
   load_balancer_type         = "application"
   internal                   = false
   idle_timeout               = 60
   enable_deletion_protection = true
 
   subnets = [
-    aws_subnet.public_0.id,
-    aws_subnet.public_1.id,
+    aws_subnet.igsr5_public_0.id,
+    aws_subnet.igsr5_public_1.id,
   ]
 
   access_logs {
@@ -25,7 +25,7 @@ resource "aws_lb" "example" {
 module "http_sg" {
   source      = "./modules/security_group"
   name        = "http-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = aws_vpc.igsr5.id
   port        = 80
   cidr_blocks = ["0.0.0.0/0"]
 }
@@ -33,7 +33,7 @@ module "http_sg" {
 module "https_sg" {
   source      = "./modules/security_group"
   name        = "https-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = aws_vpc.igsr5.id
   port        = 443
   cidr_blocks = ["0.0.0.0/0"]
 }
@@ -41,13 +41,13 @@ module "https_sg" {
 module "http_redirect_sg" {
   source      = "./modules/security_group"
   name        = "http-redirect-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = aws_vpc.igsr5.id
   port        = 8080
   cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.example.arn
+  load_balancer_arn = aws_lb.igsr5.arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -63,10 +63,10 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.example.arn
+  load_balancer_arn = aws_lb.igsr5.arn
   port              = "443"
   protocol          = "HTTPS"
-  certificate_arn   = aws_acm_certificate.example.arn
+  certificate_arn   = aws_acm_certificate.igsr5.arn
   ssl_policy        = "ELBSecurityPolicy-2016-08"
 
   default_action {
@@ -81,26 +81,10 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-resource "aws_lb_listener" "redirect_http_to_https" {
-  load_balancer_arn = aws_lb.example.arn
-  port              = "8080"
-  protocol          = "HTTP"
-
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_lb_target_group" "example" {
-  name                 = "example"
+resource "aws_lb_target_group" "igsr5" {
+  name                 = "igsr5"
   target_type          = "ip"
-  vpc_id               = aws_vpc.example.id
+  vpc_id               = aws_vpc.igsr5.id
   port                 = 80
   protocol             = "HTTP"
   deregistration_delay = 30
@@ -115,16 +99,16 @@ resource "aws_lb_target_group" "example" {
     port                = 80
     protocol            = "HTTP"
   }
-  depends_on = [aws_lb.example]
+  depends_on = [aws_lb.igsr5]
 }
 
-resource "aws_lb_listener_rule" "example" {
+resource "aws_lb_listener_rule" "igsr5" {
   listener_arn = aws_lb_listener.https.arn
   priority     = 100
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.example.arn
+    target_group_arn = aws_lb_target_group.igsr5.arn
   }
 
   condition {

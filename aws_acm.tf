@@ -1,5 +1,5 @@
-resource "aws_acm_certificate" "example" {
-  domain_name               = aws_route53_record.example.name
+resource "aws_acm_certificate" "igsr5" {
+  domain_name               = aws_route53_record.igsr5.name
   subject_alternative_names = []
   validation_method         = "DNS"
 
@@ -8,7 +8,7 @@ resource "aws_acm_certificate" "example" {
   }
 }
 
-resource "aws_acm_certificate_validation" "example" {
-  certificate_arn         = aws_acm_certificate.example.arn
-  validation_record_fqdns = [aws_route53_record.example_certificate.fqdn]
+resource "aws_acm_certificate_validation" "igsr5" {
+  certificate_arn         = aws_acm_certificate.igsr5.arn
+  validation_record_fqdns = [aws_route53_record.igsr5_certificate.fqdn]
 }

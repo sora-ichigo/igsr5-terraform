@@ -1,9 +1,9 @@
-resource "aws_ecr_repository" "example" {
-  name = "example"
+resource "aws_ecr_repository" "igsr5" {
+  name = "igsr5"
 }
 
-resource "aws_ecr_lifecycle_policy" "example" {
-  repository = aws_ecr_repository.example.name
+resource "aws_ecr_lifecycle_policy" "igsr5" {
+  repository = aws_ecr_repository.igsr5.name
 
   policy = <<EOF
   {
