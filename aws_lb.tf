@@ -16,18 +16,8 @@ resource "aws_lb" "igsr5" {
   }
 
   security_groups = [
-    module.http_sg.security_group_id,
     module.https_sg.security_group_id,
-    module.http_redirect_sg.security_group_id,
   ]
-}
-
-module "http_sg" {
-  source      = "./modules/security_group"
-  name        = "http-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 80
-  cidr_blocks = ["0.0.0.0/0"]
 }
 
 module "https_sg" {
@@ -36,30 +26,6 @@ module "https_sg" {
   vpc_id      = aws_vpc.igsr5.id
   port        = 443
   cidr_blocks = ["0.0.0.0/0"]
-}
-
-module "http_redirect_sg" {
-  source      = "./modules/security_group"
-  name        = "http-redirect-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 8080
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
-resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.igsr5.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "this is http."
-      status_code  = "200"
-    }
-  }
 }
 
 resource "aws_lb_listener" "https" {
