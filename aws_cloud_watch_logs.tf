@@ -1,4 +1,4 @@
 resource "aws_cloudwatch_log_group" "for_ecs" {
-  name              = "/ecs/igsr5"
+  name              = "/ecs/igsr5/sandbox/muson"
   retention_in_days = 180
 }

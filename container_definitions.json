@@ -1,14 +1,14 @@
 [
   {
-    "name": "igsr5",
-    "image": "nginx:latest",
+    "name": "igsr5_sandbox_muson",
+    "image": "wordpress:latest",
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
         "awslogs-region": "ap-northeast-1",
         "awslogs-stream-prefix": "nginx",
-        "awslogs-group": "/ecs/igsr5"
+        "awslogs-group": "/ecs/igsr5/sandbox/muson"
       }
     },
     "portMappings": [
@@ -19,14 +19,21 @@
     ],
     "secrets": [
       {
-        "name": "DB_USERNAME",
-        "valueFrom": "/db/username"
+        "name": "WORDPRESS_DB_USER",
+        "valueFrom": "/igsr5/db/username"
       },
       {
-        "name": "DB_PASSWORD",
-        "valueFrom": "/db/password"
+        "name": "WORDPRESS_DB_PASSWORD",
+        "valueFrom": "/igsr5/db/password"
+      },
+      {
+        "name": "WORDPRESS_DB_HOST",
+        "valueFrom": "/igsr5/db/host"
+      },
+      {
+        "name": "WORDPRESS_DB_NAME",
+        "valueFrom": "/igsr5/db/name"
       }
-    ],
-    "command": ["/usr/bin/env"]
+    ]
   }
 ]

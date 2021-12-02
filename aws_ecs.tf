@@ -8,8 +8,8 @@ resource "aws_ecs_cluster" "igsr5" {
  * タスク定義が更新されるときは、
  * aws_vpc.tf の NAT GATEWAY 関連のコメントアウトを外す
  */
-resource "aws_ecs_task_definition" "igsr5" {
-  family                   = "igsr5"
+resource "aws_ecs_task_definition" "igsr5_sandbox_muson" {
+  family                   = "igsr5_sandbox_muson"
   cpu                      = "256"
   memory                   = "512"
   network_mode             = "awsvpc"
@@ -18,10 +18,10 @@ resource "aws_ecs_task_definition" "igsr5" {
   execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
 }
 
-resource "aws_ecs_service" "igsr5" {
-  name                              = "igsr5"
+resource "aws_ecs_service" "igsr5_sandbox_muson" {
+  name                              = "igsr5_sandbox_muson"
   cluster                           = aws_ecs_cluster.igsr5.arn
-  task_definition                   = aws_ecs_task_definition.igsr5.arn
+  task_definition                   = aws_ecs_task_definition.igsr5_sandbox_muson.arn
   desired_count                     = 2
   launch_type                       = "FARGATE"
   platform_version                  = "1.3.0"
@@ -38,7 +38,7 @@ resource "aws_ecs_service" "igsr5" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.igsr5.arn
-    container_name   = "igsr5"
+    container_name   = "igsr5_sandbox_muson"
     container_port   = 80
   }
 }
