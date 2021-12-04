@@ -10,7 +10,6 @@ resource "aws_vpc" "igsr5" {
     Name = "igsr5"
   }
 }
-
 /*
  * public subnet
  * */
@@ -108,18 +107,6 @@ resource "aws_route_table" "igsr5_private_1" {
   }
 }
 
-resource "aws_route" "igsr5_private_0" {
-  route_table_id = aws_route_table.igsr5_private_0.id
-  nat_gateway_id = aws_nat_gateway.igsr5_0.id
-  destination_cidr_block = "0.0.0.0/0"
-}
-
-resource "aws_route" "igsr5_private_1" {
-  route_table_id = aws_route_table.igsr5_private_1.id
-  nat_gateway_id = aws_nat_gateway.igsr5_1.id
-  destination_cidr_block = "0.0.0.0/0"
-}
-
 resource "aws_route_table_association" "private_0" {
   subnet_id      = aws_subnet.igsr5_private_0.id
   route_table_id = aws_route_table.igsr5_private_0.id
@@ -153,4 +140,16 @@ resource "aws_nat_gateway" "igsr5_1" {
   allocation_id = aws_eip.igsr5_1.id
   subnet_id = aws_subnet.igsr5_public_1.id
   depends_on = [aws_internet_gateway.igsr5]
+}
+
+resource "aws_route" "igsr5_private_0" {
+  route_table_id = aws_route_table.igsr5_private_0.id
+  nat_gateway_id = aws_nat_gateway.igsr5_0.id
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+resource "aws_route" "igsr5_private_1" {
+  route_table_id = aws_route_table.igsr5_private_1.id
+  nat_gateway_id = aws_nat_gateway.igsr5_1.id
+  destination_cidr_block = "0.0.0.0/0"
 }
