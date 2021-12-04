@@ -25,7 +25,7 @@ resource "aws_ecs_service" "igsr5_sandbox_muson" {
   desired_count                     = 2
   launch_type                       = "FARGATE"
   platform_version                  = "1.3.0"
-  health_check_grace_period_seconds = 120
+  health_check_grace_period_seconds = 600
 
   network_configuration {
     assign_public_ip = false
