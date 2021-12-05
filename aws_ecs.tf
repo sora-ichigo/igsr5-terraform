@@ -22,7 +22,7 @@ resource "aws_ecs_service" "igsr5_sandbox_muson" {
   name                              = "igsr5_sandbox_muson"
   cluster                           = aws_ecs_cluster.igsr5.arn
   task_definition                   = aws_ecs_task_definition.igsr5_sandbox_muson.arn
-  desired_count                     = 2
+  desired_count                     = 1
   launch_type                       = "FARGATE"
   platform_version                  = "1.3.0"
   health_check_grace_period_seconds = 600
@@ -32,7 +32,6 @@ resource "aws_ecs_service" "igsr5_sandbox_muson" {
     security_groups  = [module.nginx_sg.security_group_id]
     subnets = [
       aws_subnet.igsr5_private_0.id,
-      aws_subnet.igsr5_private_1.id,
     ]
   }
 
