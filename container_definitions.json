@@ -17,6 +17,12 @@
         "containerPort": 80
       }
     ],
+    "mountPoints": [
+      {
+        "containerPath": "/var/www/html",
+        "sourceVolume": "igsr5-sandbox-muson"
+      }
+    ],
     "environment": [
       {
         "name": "WORDPRESS_DB_NAME",

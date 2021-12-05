@@ -16,6 +16,15 @@ resource "aws_ecs_task_definition" "igsr5_sandbox_muson" {
   requires_compatibilities = ["FARGATE"]
   container_definitions    = file("./container_definitions.json")
   execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+
+  volume {
+    name = "igsr5-sandbox-muson"
+
+    efs_volume_configuration {
+      file_system_id = aws_efs_file_system.igsr5_sandbox_muson.id
+      root_directory = "/"
+    }
+  }
 }
 
 resource "aws_ecs_service" "igsr5_sandbox_muson" {
@@ -24,7 +33,7 @@ resource "aws_ecs_service" "igsr5_sandbox_muson" {
   task_definition                   = aws_ecs_task_definition.igsr5_sandbox_muson.arn
   desired_count                     = 1
   launch_type                       = "FARGATE"
-  platform_version                  = "1.3.0"
+  platform_version                  = "1.4.0"
   health_check_grace_period_seconds = 600
 
   network_configuration {

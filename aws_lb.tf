@@ -54,16 +54,16 @@ resource "aws_lb_target_group" "igsr5" {
   protocol             = "HTTP"
   deregistration_delay = 300
 
-  // health_check {
-  //   path                = "/"
-  //   healthy_threshold   = 5
-  //   unhealthy_threshold = 2
-  //   timeout             = 5
-  //   interval            = 30
-  //   matcher             = 200
-  //   port                = 80
-  //   protocol            = "HTTP"
-  // }
+  //health_check {
+  //  path                = "/"
+  //  healthy_threshold   = 5
+  //  unhealthy_threshold = 2
+  //  timeout             = 5
+  //  interval            = 300
+  //  matcher             = 200
+  //  port                = 80
+  //  protocol            = "HTTP"
+  //}
   depends_on = [aws_lb.igsr5]
 }
 
@@ -77,8 +77,8 @@ resource "aws_lb_listener_rule" "igsr5" {
   }
 
   condition {
-    path_pattern {
-      values = ["/*"]
+    host_header {
+      values = ["sandbox_muson.igsr5.com"]
     }
   }
 }
