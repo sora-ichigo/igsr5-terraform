@@ -1,7 +1,7 @@
 [
   {
     "name": "igsr5_sandbox_muson",
-    "image": "wordpress:latest",
+    "image": "wordpress",
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
