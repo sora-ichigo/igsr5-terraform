@@ -39,7 +39,7 @@ resource "aws_db_instance" "igsr5_sandbox" {
   storage_encrypted          = false
   username                   = "admin"
   password                   = "uninitialized"
-  multi_az                   = false
+  multi_az                   = true
   publicly_accessible        = false
   backup_window              = "09:10-09:40"
   backup_retention_period    = 30
