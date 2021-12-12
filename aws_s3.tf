@@ -27,3 +27,7 @@ data "aws_iam_policy_document" "alb_log" {
     }
   }
 }
+
+resource "aws_s3_bucket" "athena" {
+  bucket = "athena-igsr5"
+}
