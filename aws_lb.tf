@@ -2,7 +2,7 @@ resource "aws_lb" "igsr5" {
   name                       = "igsr5"
   load_balancer_type         = "application"
   internal                   = false
-  idle_timeout               = 60
+  idle_timeout               = 3600
   enable_deletion_protection = true
 
   subnets = [
