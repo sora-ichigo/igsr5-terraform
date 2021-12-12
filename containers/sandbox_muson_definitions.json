@@ -1,7 +1,7 @@
 [
   {
     "name": "igsr5_sandbox_muson",
-    "image": "wordpress",
+    "image": "799705073177.dkr.ecr.ap-northeast-1.amazonaws.com/igsr5:wordpress",
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
