@@ -11,6 +11,21 @@ resource "aws_db_parameter_group" "igsr5_sandbox" {
     name  = "character_set_server"
     value = "utf8mb4"
   }
+
+  parameter {
+    name = "slow_query_log"
+    value = 1
+  }
+
+  parameter {
+    name = "general_log"
+    value = 1
+  }
+
+  parameter {
+    name = "long_query_time"
+    value = 5
+  }
 }
 
 resource "aws_db_option_group" "igsr5_sandbox" {
@@ -39,7 +54,7 @@ resource "aws_db_instance" "igsr5_sandbox" {
   storage_encrypted          = false
   username                   = "admin"
   password                   = "uninitialized"
-  multi_az                   = true
+  multi_az                   = false
   publicly_accessible        = false
   backup_window              = "09:10-09:40"
   backup_retention_period    = 30
@@ -49,6 +64,11 @@ resource "aws_db_instance" "igsr5_sandbox" {
   skip_final_snapshot        = true
   port                       = 3306
   apply_immediately          = false
+  enabled_cloudwatch_logs_exports = [
+    "error",
+    "general",
+    "slowquery"
+  ]
   vpc_security_group_ids     = [module.mysql_sg.security_group_id]
   parameter_group_name       = aws_db_parameter_group.igsr5_sandbox.name
   option_group_name          = aws_db_option_group.igsr5_sandbox.name
