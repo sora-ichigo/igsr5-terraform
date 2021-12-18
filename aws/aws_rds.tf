@@ -78,11 +78,3 @@ resource "aws_db_instance" "igsr5_sandbox" {
     ignore_changes = [password]
   }
 }
-
-module "mysql_sg" {
-  source      = "./modules/security_group"
-  name        = "mysql-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 3306
-  cidr_blocks = [aws_vpc.igsr5.cidr_block]
-}
