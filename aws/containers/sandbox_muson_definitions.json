@@ -11,12 +11,6 @@
         "awslogs-group": "/ecs/igsr5/sandbox/muson"
       }
     },
-    "portMappings": [
-      {
-        "protocol": "tcp",
-        "containerPort": 80
-      }
-    ],
     "mountPoints": [
       {
         "containerPath": "/var/www/html",

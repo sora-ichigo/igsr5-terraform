@@ -26,15 +26,15 @@ module "time_management_slack_sg" {
   source      = "./modules/security_group"
   name        = "time-management-slack-sg"
   vpc_id      = aws_vpc.igsr5.id
-  port        = 3000
+  port        = 80
   cidr_blocks = ["0.0.0.0/0"]
 }
 
 module "vpc_endpoint_sg" {
-  source = "./modules/security_group"
-  name = "vpc-endpoint-sg"
-  vpc_id = aws_vpc.igsr5.id
-  port = 443
+  source      = "./modules/security_group"
+  name        = "vpc-endpoint-sg"
+  vpc_id      = aws_vpc.igsr5.id
+  port        = 443
   cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }
 

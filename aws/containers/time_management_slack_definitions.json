@@ -56,6 +56,12 @@
         "awslogs-group": "/ecs/igsr5/prod/time_management_bolt"
       }
     },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 80
+      }
+    ],
     "secrets": [
       {
         "name": "DSN",

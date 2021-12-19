@@ -24,12 +24,12 @@ resource "aws_ecs_service" "igsr5_sandbox_muson" {
 }
 
 resource "aws_ecs_service" "igsr5_time_management_slack" {
-  name                              = "igsr5_time_management_slack"
-  cluster                           = aws_ecs_cluster.igsr5.arn
-  task_definition                   = aws_ecs_task_definition.igsr5_time_management_slack.arn
-  desired_count                     = 2
-  launch_type                       = "FARGATE"
-  platform_version                  = "1.4.0"
+  name             = "igsr5_time_management_slack"
+  cluster          = aws_ecs_cluster.igsr5.arn
+  task_definition  = aws_ecs_task_definition.igsr5_time_management_slack.arn
+  desired_count    = 2
+  launch_type      = "FARGATE"
+  platform_version = "1.4.0"
   // health_check_grace_period_seconds = 600
 
   network_configuration {
