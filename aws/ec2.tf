@@ -17,19 +17,3 @@ resource "aws_instance" "igsr5_debug_server" {
     Name = "igsr5-debug"
   }
 }
-
-module "igsr5_debug_server_sg" {
-  source      = "./modules/security_group"
-  name        = "igsr5-debug-server-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 22
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
-module "igsr5_debug_server_sg_80" {
-  source      = "./modules/security_group"
-  name        = "igsr5-debug-server-sg-80"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 80
-  cidr_blocks = ["0.0.0.0/0"]
-}

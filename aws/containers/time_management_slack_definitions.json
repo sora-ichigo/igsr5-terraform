@@ -1,0 +1,92 @@
+[
+  {
+    "name": "igsr5_time_management_go",
+    "image": "799705073177.dkr.ecr.ap-northeast-1.amazonaws.com/igsr5:time-management-go",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "time-management-go",
+        "awslogs-group": "/ecs/igsr5/prod/time_management_go"
+      }
+    },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 8000
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DSN",
+        "valueFrom": "/igsr5/time_management_slack/dsn"
+      },
+      {
+        "name": "BOT_USER_OAUTH_TOKEN",
+        "valueFrom": "/igsr5/time_management_slack/bot_user_oauth_token"
+      },
+      {
+        "name": "SIGNING_SECRET",
+        "valueFrom": "/igsr5/time_management_slack/signing_secret"
+      },
+      {
+        "name": "APP_TOKEN",
+        "valueFrom": "/igsr5/time_management_slack/app_token"
+      },
+      {
+        "name": "AUTH_USER_ID",
+        "valueFrom": "/igsr5/time_management_slack/auth_user_id"
+      },
+      {
+        "name": "AUTH_USER_NAME",
+        "valueFrom": "/igsr5/time_management_slack/auth_user_name"
+      }
+    ]
+  },
+  {
+    "name": "igsr5_time_management_bolt",
+    "image": "799705073177.dkr.ecr.ap-northeast-1.amazonaws.com/igsr5:time-management-bolt",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "time-management-bolt",
+        "awslogs-group": "/ecs/igsr5/prod/time_management_bolt"
+      }
+    },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 80
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DSN",
+        "valueFrom": "/igsr5/time_management_slack/dsn"
+      },
+      {
+        "name": "BOT_USER_OAUTH_TOKEN",
+        "valueFrom": "/igsr5/time_management_slack/bot_user_oauth_token"
+      },
+      {
+        "name": "SIGNING_SECRET",
+        "valueFrom": "/igsr5/time_management_slack/signing_secret"
+      },
+      {
+        "name": "APP_TOKEN",
+        "valueFrom": "/igsr5/time_management_slack/app_token"
+      },
+      {
+        "name": "AUTH_USER_ID",
+        "valueFrom": "/igsr5/time_management_slack/auth_user_id"
+      },
+      {
+        "name": "AUTH_USER_NAME",
+        "valueFrom": "/igsr5/time_management_slack/auth_user_name"
+      }
+    ]
+  }
+]

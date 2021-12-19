@@ -13,17 +13,17 @@ resource "aws_db_parameter_group" "igsr5_sandbox" {
   }
 
   parameter {
-    name = "slow_query_log"
+    name  = "slow_query_log"
     value = 1
   }
 
   parameter {
-    name = "general_log"
+    name  = "general_log"
     value = 1
   }
 
   parameter {
-    name = "long_query_time"
+    name  = "long_query_time"
     value = 5
   }
 }
@@ -69,20 +69,12 @@ resource "aws_db_instance" "igsr5_sandbox" {
     "general",
     "slowquery"
   ]
-  vpc_security_group_ids     = [module.mysql_sg.security_group_id]
-  parameter_group_name       = aws_db_parameter_group.igsr5_sandbox.name
-  option_group_name          = aws_db_option_group.igsr5_sandbox.name
-  db_subnet_group_name       = aws_db_subnet_group.igsr5.name
+  vpc_security_group_ids = [module.mysql_sg.security_group_id]
+  parameter_group_name   = aws_db_parameter_group.igsr5_sandbox.name
+  option_group_name      = aws_db_option_group.igsr5_sandbox.name
+  db_subnet_group_name   = aws_db_subnet_group.igsr5.name
 
   lifecycle {
-    ignore_changes = [password]
+    ignore_changes = [password, latest_restorable_time]
   }
-}
-
-module "mysql_sg" {
-  source      = "./modules/security_group"
-  name        = "mysql-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 3306
-  cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }

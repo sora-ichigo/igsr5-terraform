@@ -33,7 +33,3 @@ resource "aws_route53_record" "igsr5_certificate" {
   zone_id = data.aws_route53_zone.igsr5.id
   ttl     = 60
 }
-
-output "domain_name" {
-  value = aws_route53_record.igsr5.name
-}
