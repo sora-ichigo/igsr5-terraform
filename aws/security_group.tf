@@ -26,7 +26,7 @@ module "time_management_slack_sg" {
   source      = "./modules/security_group"
   name        = "time-management-slack-sg"
   vpc_id      = aws_vpc.igsr5.id
-  port        = 80
+  port        = 3000
   cidr_blocks = ["0.0.0.0/0"]
 }
 
