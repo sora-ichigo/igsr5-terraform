@@ -75,12 +75,12 @@ resource "aws_internet_gateway" "igsr5" {
 /*
  * nat gateway
  * */
-resource "aws_nat_gateway" "igsr5" {
-  allocation_id = aws_eip.nat_gateway.id
-  subnet_id     = aws_subnet.igsr5_public_0.id
-  depends_on    = [aws_internet_gateway.igsr5]
-
-  tags = {
-    Name = "igsr5"
-  }
-}
+// resource "aws_nat_gateway" "igsr5" {
+//   allocation_id = aws_eip.nat_gateway.id
+//   subnet_id     = aws_subnet.igsr5_public_0.id
+//   depends_on    = [aws_internet_gateway.igsr5]
+// 
+//   tags = {
+//     Name = "igsr5"
+//   }
+// }
