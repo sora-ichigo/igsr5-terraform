@@ -1,3 +1,5 @@
+// example. ALB: https://igsr5.com をオリジンとする CloudFront Distribution
+//
 // resource "aws_cloudfront_distribution" "igsr5" {
 //   origin {
 //     domain_name = "igsr5.com"
