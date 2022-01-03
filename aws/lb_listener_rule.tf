@@ -3,12 +3,12 @@ resource "aws_lb_listener_rule" "igsr5_sandbox_muson" {
   priority     = 100
 
   action {
-    type             = "redirect"
+    type = "redirect"
 
     redirect {
-      port = "443"
-      host = "sandbox.muson.co.jp"
-      protocol = "HTTPS"
+      port        = "443"
+      host        = "sandbox.muson.co.jp"
+      protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
   }
