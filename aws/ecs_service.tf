@@ -25,7 +25,7 @@ resource "aws_ecs_service" "igsr5_time_management_slack" {
   //   container_name   = "igsr5_time_management_bolt"
   //   container_port   = 80
   // }
-  lifecycle {
-    ignore_changes = [task_definition]
-  }
+  // lifecycle {
+  //  ignore_changes = [task_definition]
+  // }
 }

@@ -53,11 +53,3 @@ module "igsr5_debug_server_sg_80" {
   port        = 80
   cidr_blocks = ["0.0.0.0/0"]
 }
-
-module "igsr5_sandbox_muson_sg" {
-  source      = "./modules/security_group"
-  name        = "igsr5-sandbox-muson-efs-sg"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 2049
-  cidr_blocks = [aws_vpc.igsr5.cidr_block]
-}

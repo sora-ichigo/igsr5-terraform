@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "igsr5_time_management_slack" {
   family                   = "igsr5_time_management_slack"
-  cpu                      = "512"
-  memory                   = "1024"
+  cpu                      = "256"
+  memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   container_definitions    = file("./containers/time_management_slack_definitions.json")
