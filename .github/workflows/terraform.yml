@@ -61,8 +61,7 @@ jobs:
           GITHUB_ISSUE_NUMBER: ${{ steps.findPr.outputs.pr }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          script: | const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
@@ -90,4 +89,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        run: cd aws && terraform apply -auto-approve
