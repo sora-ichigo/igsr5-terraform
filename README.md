@@ -1,4 +1,7 @@
 # Terraform repository for igsr5
+![](https://github.com/igsr5/igsr5-terraform/workflows/terraform%20apply/badge.svg)
+![](https://img.shields.io/badge/license-MIT-green)
+
 Infrastructure code at igsr5
 ## Devlopment Guide 📝
 ⚠️ 2021/12/31 追記）ひと月で 2万円くらいかかってしまったので、だいぶ構成ケチるようにした。具体的には Nat Gateway を止めて ECS コンテナをパブリックネットワークで管理するようにした。元に戻したい時は https://github.com/igsr5/igsr5-terraform/pull/21 をリバートする。
