@@ -1,6 +1,6 @@
 resource "aws_key_pair" "igsr5_debug_server_key_pair" {
   key_name   = "igsr5_debug_server"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCq60lia0S2EnAJfAj3r5y7+QGkXgDLLy4/ECv7d0Akd7t4JaJ49h9o2W3yByKlWJaLsHmocu4xbzk5h+L191los/DSQyUax+n2I1oHlYxyjUVS4OD+Zfi3JHBygcNApIuSvZY0yQR/1mmYHe5m3VCVFnQlVYHr/k45GxXLJR8NNpIABNmIMIhpEpVdlOtpF0nc0GDqBsBOMycwf2ffF7CSBszg7nlOQbgelFhIiielT7IAmFIGVI9JTjNfB49t8AjHefLrkwV16jZ10jkAK2qUQ0gFXJB8lDnow6SQYD+WHlkL26Qgj80e73wADyys4BWkVJYsc/lbX5iOZ/tqYaQGyZFcNIqByiF6At8Q8HjKbKxEt9bl85mYd90E7+c2E+qY5HmKmYqU4/ocIxXyIM6CuhI0oO6Z7kHe0EiZP32EMUWzIPwLB5nsMS+PFNlS3OD6L5fDCVAPfLbWhgH48nFu7nRoY9zzwaoHvqE3MYHy9N/6HC7xN5hJkOyA/lDf2eE= ichigo@Macbook.local"
 }
 
 data "aws_ssm_parameter" "amzn2_ami" {
