@@ -34,5 +34,4 @@ resource "aws_s3_bucket" "athena" {
 
 resource "aws_s3_bucket" "igsr5_images" {
   bucket = "igsr5-images"
-  acl    = "private"
 }
