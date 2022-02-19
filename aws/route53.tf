@@ -32,8 +32,8 @@ resource "aws_route53_record" "igsr5_images" {
   type    = "A"
 
   alias {
-    name    = aws_cloudfront_distribution.igsr5-images.domain_name
-    zone_id = aws_cloudfront_distribution.igsr5-images.hosted_zone_id
+    name    = aws_cloudfront_distribution.igsr5_images.domain_name
+    zone_id = aws_cloudfront_distribution.igsr5_images.hosted_zone_id
 
     evaluate_target_health = true
   }

@@ -46,7 +46,7 @@ resource "aws_cloudfront_distribution" "igsr5" {
   }
 }
 
-resource "aws_cloudfront_distribution" "igsr5-images" {
+resource "aws_cloudfront_distribution" "igsr5_images" {
   origin {
     domain_name = aws_s3_bucket.igsr5_images.bucket_regional_domain_name
     origin_id   = "igsr5-images"
