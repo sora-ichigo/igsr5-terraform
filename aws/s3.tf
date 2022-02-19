@@ -31,3 +31,8 @@ data "aws_iam_policy_document" "alb_log" {
 resource "aws_s3_bucket" "athena" {
   bucket = "athena-igsr5"
 }
+
+resource "aws_s3_bucket" "igsr5_images" {
+  bucket = "igsr5-images"
+  acl    = "private"
+}

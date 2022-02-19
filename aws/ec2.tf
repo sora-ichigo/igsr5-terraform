@@ -16,4 +16,7 @@ resource "aws_instance" "igsr5_debug_server" {
   tags = {
     Name = "igsr5-debug"
   }
+  lifecycle {
+    ignore_changes = [ami]
+  }
 }
