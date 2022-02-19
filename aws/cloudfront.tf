@@ -52,6 +52,9 @@ resource "aws_cloudfront_distribution" "igsr5_images" {
   origin {
     domain_name = aws_s3_bucket.igsr5_images.bucket_regional_domain_name
     origin_id   = "igsr5-images"
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.static-www.cloudfront_access_identity_path
+    }
   }
 
   enabled = true
@@ -87,3 +90,5 @@ resource "aws_cloudfront_distribution" "igsr5_images" {
     minimum_protocol_version = "TLSv1"
   }
 }
+
+resource "aws_cloudfront_origin_access_identity" "static-www" {}
