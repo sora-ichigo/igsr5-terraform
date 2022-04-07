@@ -14,11 +14,19 @@ module "mysql_sg" {
   cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }
 
-module "nginx_sg" {
+module "http_sg" {
   source      = "./modules/security_group"
-  name        = "nginx-sg"
+  name        = "http-sg"
   vpc_id      = aws_vpc.igsr5.id
   port        = 80
+  cidr_blocks = [aws_vpc.igsr5.cidr_block]
+}
+
+module "ssh_sg" {
+  source      = "./modules/security_group"
+  name        = "ssh-sg"
+  vpc_id      = aws_vpc.igsr5.id
+  port        = 22
   cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }
 
