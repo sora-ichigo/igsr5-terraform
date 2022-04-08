@@ -12,7 +12,7 @@ resource "aws_instance" "igsr5_debug_server" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.igsr5_debug_server_key_pair.id
   subnet_id              = aws_subnet.igsr5_public_0.id
-  vpc_security_group_ids = [module.igsr5_debug_server_sg.security_group_id, module.igsr5_debug_server_sg_80.security_group_id]
+  vpc_security_group_ids = [module.http_pub_sg.security_group_id, module.ssh_pub_sg.security_group_id]
   tags = {
     Name = "igsr5-debug"
   }
@@ -31,7 +31,7 @@ resource "aws_instance" "igsr5_gmo_practice_server" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.igsr5_gmo_practice_server.id
   subnet_id              = aws_subnet.igsr5_public_0.id
-  vpc_security_group_ids = [module.http_sg.security_group_id, module.ssh_sg.security_group_id]
+  vpc_security_group_ids = [module.http_pub_sg.security_group_id, module.ssh_pub_sg.security_group_id]
   tags = {
     Name = "igsr5-gmo-practice-server"
   }
