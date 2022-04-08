@@ -27,7 +27,8 @@ resource "aws_key_pair" "igsr5_gmo_practice_server" {
 }
 
 resource "aws_instance" "igsr5_gmo_practice_server" {
-  ami                    = data.aws_ssm_parameter.amzn2_ami.value
+  // NOTE: isucon9 予選環境
+  ami                    = "ami-03b1b78bb1da5122f"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.igsr5_gmo_practice_server.id
   subnet_id              = aws_subnet.igsr5_public_0.id
@@ -35,7 +36,7 @@ resource "aws_instance" "igsr5_gmo_practice_server" {
   tags = {
     Name = "igsr5-gmo-practice-server"
   }
-  lifecycle {
-    ignore_changes = [ami]
-  }
+  // lifecycle {
+  //   ignore_changes = [ami]
+  // }
 }

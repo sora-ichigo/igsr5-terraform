@@ -48,7 +48,7 @@ module "vpc_endpoint_sg" {
 
 module "http_pub_sg" {
   source      = "./modules/security_group"
-  name        = "http-sg"
+  name        = "http-pub-sg"
   vpc_id      = aws_vpc.igsr5.id
   port        = 80
   cidr_blocks = ["0.0.0.0/0"]
@@ -56,7 +56,7 @@ module "http_pub_sg" {
 
 module "ssh_pub_sg" {
   source      = "./modules/security_group"
-  name        = "ssh-sg"
+  name        = "ssh-pub-sg"
   vpc_id      = aws_vpc.igsr5.id
   port        = 22
   cidr_blocks = ["0.0.0.0/0"]
