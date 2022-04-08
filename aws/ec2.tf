@@ -36,7 +36,7 @@ resource "aws_instance" "igsr5_gmo_practice_server" {
   tags = {
     Name = "igsr5-gmo-practice-server"
   }
-  lifecycle {
-    ignore_changes = [ami]
-  }
+  // lifecycle {
+  //   ignore_changes = [ami]
+  // }
 }
