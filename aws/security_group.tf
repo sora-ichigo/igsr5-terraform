@@ -46,18 +46,20 @@ module "vpc_endpoint_sg" {
   cidr_blocks = [aws_vpc.igsr5.cidr_block]
 }
 
-module "igsr5_debug_server_sg" {
+module "http_pub_sg" {
   source      = "./modules/security_group"
-  name        = "igsr5-debug-server-sg"
+  name        = "http-sg"
+  vpc_id      = aws_vpc.igsr5.id
+  port        = 80
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+module "ssh_pub_sg" {
+  source      = "./modules/security_group"
+  name        = "ssh-sg"
   vpc_id      = aws_vpc.igsr5.id
   port        = 22
   cidr_blocks = ["0.0.0.0/0"]
 }
 
-module "igsr5_debug_server_sg_80" {
-  source      = "./modules/security_group"
-  name        = "igsr5-debug-server-sg-80"
-  vpc_id      = aws_vpc.igsr5.id
-  port        = 80
-  cidr_blocks = ["0.0.0.0/0"]
-}
+
