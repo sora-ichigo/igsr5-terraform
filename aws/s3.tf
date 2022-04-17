@@ -58,3 +58,7 @@ data "aws_iam_policy_document" "igsr5_images" {
     ]
   }
 }
+
+resource "aws_s3_bucket" "portfolio-api-lambda-code" {
+  bucket = "igsr5-portfolio-api-lambda-code"
+}
