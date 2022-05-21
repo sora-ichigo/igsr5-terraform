@@ -2,17 +2,17 @@ data "aws_route53_zone" "igsr5" {
   name = "igsr5.com"
 }
 
-resource "aws_route53_record" "igsr5" {
-  zone_id = data.aws_route53_zone.igsr5.zone_id
-  name    = data.aws_route53_zone.igsr5.name
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.igsr5.dns_name
-    zone_id                = aws_lb.igsr5.zone_id
-    evaluate_target_health = true
-  }
-}
+# resource "aws_route53_record" "igsr5" {
+#   zone_id = data.aws_route53_zone.igsr5.zone_id
+#   name    = data.aws_route53_zone.igsr5.name
+#   type    = "A"
+# 
+#   alias {
+#     name                   = aws_lb.igsr5.dns_name
+#     zone_id                = aws_lb.igsr5.zone_id
+#     evaluate_target_health = true
+#   }
+# }
 
 resource "aws_route53_record" "igsr5_sandbox_muson" {
   zone_id = data.aws_route53_zone.igsr5.zone_id
