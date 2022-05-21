@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "igsr5" {
-  domain_name               = aws_route53_record.igsr5.name
+  domain_name               = data.aws_route53_zone.igsr5.name
   subject_alternative_names = [format("*.%s", aws_route53_record.igsr5.name)]
   validation_method         = "DNS"
 
