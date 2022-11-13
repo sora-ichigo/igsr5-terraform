@@ -9,6 +9,9 @@ jobs:
   terraform:
     name: 'Terraform Apply to GCP'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./gcp
     working-directory: ./gcp
     steps:
       - name: Checkout
