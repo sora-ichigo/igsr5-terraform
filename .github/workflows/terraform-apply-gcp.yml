@@ -5,9 +5,7 @@ on:
       - master
   pull_request:
     types: [opened, synchronize]
-permissions:
-  contents: read
-  id-token: write
+permissions: write-all
 jobs:
   terraform:
     name: 'Terraform Apply to GCP'
