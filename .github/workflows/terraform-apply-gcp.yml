@@ -1,0 +1,96 @@
+name: 'terraform apply gcp'
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
+permissions: write-all
+jobs:
+  terraform:
+    name: 'Terraform Apply to GCP'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./gcp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          # terraform_version: 0.13.0 
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTIFY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_MAIL_ADDRESS }}
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: find pr
+        uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        with:
+          state: open
+
+      - name: Update Pull Request
+        uses: actions/github-script@0.9.0
+        if: github.ref != 'refs/heads/master'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          GITHUB_ISSUE_NUMBER: ${{ steps.findPr.outputs.pr }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `
+            ## Terraform Plan of GCP
+            #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.issues.createComment({
+              issue_number: process.env.GITHUB_ISSUE_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: cd aws && terraform apply -auto-approve
