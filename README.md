@@ -1,5 +1,4 @@
 # Terraform repository for igsr5
-![](https://github.com/igsr5/igsr5-terraform/workflows/terraform%20apply/badge.svg)
 ![](https://img.shields.io/badge/license-MIT-green)
 
 Infrastructure code at igsr5
