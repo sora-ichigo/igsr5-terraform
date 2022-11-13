@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "attendance_request_bot" {
   name             = "attendance-request-bot"
   description      = "Sends a message to the attendance-request-bot channel"
-  schedule         = "9 45 * * 1"
+  schedule         = "45 10 * * 1"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
