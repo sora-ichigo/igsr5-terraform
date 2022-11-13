@@ -11,6 +11,6 @@ resource "google_cloud_scheduler_job" "attendance_request_bot" {
 
   http_target {
     http_method = "POST"
-    uri         = google_cloud_run_service.attendance_request_bot.url
+    uri         = google_cloud_run_service.attendance_request_bot.status[0].url
   }
 }
