@@ -12,3 +12,4 @@ resource "aws_acm_certificate_validation" "igsr5" {
   certificate_arn         = aws_acm_certificate.igsr5.arn
   validation_record_fqdns = [aws_route53_record.igsr5_certificate.fqdn]
 }
+
