@@ -3,7 +3,7 @@
  * 友人に毎週月曜日に講義の出席を依頼するボット
  */
 resource "google_service_account" "attendance_request_scheduler_sa" {
-  account_id   = "cloud-run-invoker-sa"
+  account_id   = "cloud-run-invoker-sa-a-r-s"
   display_name = "Cloud Run Invoker Service Account"
 }
 
@@ -27,7 +27,7 @@ resource "google_cloud_run_service_iam_policy" "attendance_request_scheduler_sa_
  * igsr5の日報アプリ
  */
 resource "google_service_account" "igsr5_daily_sa" {
-  account_id   = "cloud-run-invoker-sa"
+  account_id   = "cloud-run-invoker-sa-i-d"
   display_name = "Cloud Run Invoker Service Account"
 }
 
