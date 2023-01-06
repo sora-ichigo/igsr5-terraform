@@ -25,7 +25,7 @@ resource "google_cloud_run_service" "attendance_request_bot" {
  * igsr5の日報アプリ
  */
 resource "google_cloud_run_service" "igsr5_daily" {
-  name     = "igsr5_daily"
+  name     = "igsr5-daily"
   location = "asia-northeast1"
 
   template {
