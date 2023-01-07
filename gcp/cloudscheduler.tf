@@ -33,7 +33,7 @@
  */
 resource "google_cloud_scheduler_job" "igsr5_daily" {
   name             = "igsr5-daily"
-  schedule         = "0 18 * * *"
+  schedule         = "0 19 * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 

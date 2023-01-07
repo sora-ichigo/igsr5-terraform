@@ -89,3 +89,25 @@ resource "google_secret_manager_secret_iam_policy" "igsr5_daily_slack_admin_user
 }
 
 
+resource "google_secret_manager_secret" "igsr5-daily_slack_webhook_url" {
+  secret_id = "igsr5-daily--slack-webhook-url"
+
+  labels = {
+    label = "igsr5-daily--slack-webhook-url"
+  }
+
+  replication {
+    user_managed {
+      replicas {
+        location = "asia-northeast1"
+      }
+    }
+  }
+}
+resource "google_secret_manager_secret_iam_policy" "igsr5_daily_slack_webhook_url" {
+  project     = google_secret_manager_secret.igsr5-daily_slack_webhook_url.project
+  secret_id   = google_secret_manager_secret.igsr5-daily_slack_webhook_url.secret_id
+  policy_data = data.google_iam_policy.igsr5_daily_cloud_run.policy_data
+}
+
+

@@ -64,6 +64,15 @@ resource "google_cloud_run_service" "igsr5_daily" {
             }
           }
         }
+        env {
+          name = "SLACK_WEBHOOK_URL"
+          value_from {
+            secret_key_ref {
+              name = "igsr5-daily--slack-webhook-url"
+              key  = "1"
+            }
+          }
+        }
 
         env {
           name = "SLACK_SIGNING_SECRET"
