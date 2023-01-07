@@ -25,20 +25,72 @@ resource "google_cloud_run_service" "attendance_request_bot" {
  * igsr5の日報アプリ
  */
 resource "google_cloud_run_service" "igsr5_daily" {
-  name     = "igsr5-daily"
-  location = "asia-northeast1"
+  name                       = "igsr5-daily"
+  location                   = "asia-northeast1"
+  autogenerate_revision_name = true
 
   template {
     spec {
       containers {
         // NOTE: This is temporary. This will be replaced with a container image.
         image = "us-docker.pkg.dev/cloudrun/container/hello"
+
+        env {
+          name  = "TZ"
+          value = "Asia/Tokyo"
+        }
+
+        env {
+          name  = "NODE_ENV"
+          value = "production"
+        }
+
+        env {
+          name = "DATABASE_URL"
+          value_from {
+            secret_key_ref {
+              name = "igsr5-daily--database-url"
+              key  = "2"
+            }
+          }
+        }
+
+        env {
+          name = "SLACK_BOT_TOKEN"
+          value_from {
+            secret_key_ref {
+              name = "igsr5-daily--slack-bot-token"
+              key  = "2"
+            }
+          }
+        }
+
+        env {
+          name = "SLACK_SIGNING_SECRET"
+          value_from {
+            secret_key_ref {
+              name = "igsr5-daily--slack-signing-secret"
+              key  = "2"
+            }
+          }
+        }
+
+        env {
+          name = "SLACK_ADMIN_USER_ID"
+          value_from {
+            secret_key_ref {
+              name = "igsr5-daily--slack-admin-user-id"
+              key  = "2"
+            }
+          }
+        }
+
       }
     }
   }
 
   lifecycle {
-    ignore_changes = [template]
+    ignore_changes = [template[0].spec[0].containers[0].image]
   }
 }
 
