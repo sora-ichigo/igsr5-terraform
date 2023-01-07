@@ -35,7 +35,8 @@ data "google_iam_policy" "igsr5_daily_invoker" {
   binding {
     role = "roles/run.invoker"
     members = [
-      "serviceAccount:${google_service_account.igsr5_daily_sa.email}"
+      "serviceAccount:${google_service_account.igsr5_daily_sa.email}",
+      "allUsers"
     ]
   }
 }
