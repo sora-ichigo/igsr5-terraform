@@ -50,7 +50,7 @@ resource "google_cloud_run_service" "igsr5_daily" {
           value_from {
             secret_key_ref {
               name = "igsr5-daily--database-url"
-              key  = "4"
+              key  = "5"
             }
           }
         }
