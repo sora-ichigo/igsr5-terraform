@@ -136,7 +136,7 @@ resource "google_cloud_run_service" "github_project_automation_prototype" {
   }
 
   depends_on = [
-    google_secret_manager_secret_version.github_project_automation_prototype_gh_token_version
+    google_secret_manager_secret_version.github_project_automation_prototype_gh_token
   ]
 }
 
