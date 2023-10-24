@@ -46,3 +46,28 @@ resource "google_cloud_run_service_iam_policy" "igsr5_daily_sa_policy" {
   service     = google_cloud_run_service.igsr5_daily.name
   policy_data = data.google_iam_policy.igsr5_daily_invoker.policy_data
 }
+
+/*
+ * github-project-automation-prototype
+ * igsr5の個人向けのGitHubプロジェクト自動化ツール
+ */
+resource "google_service_account" "github_project_automation_prototype_sa" {
+  account_id   = "cloud-run-invoker-sa-g-p-a-p"
+  display_name = "Cloud Run Invoker Service Account"
+}
+
+data "google_iam_policy" "github_project_automation_prototype_invoker" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "serviceAccount:${google_service_account.github_project_automation_prototype_sa.email}",
+      "allUsers"
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "github_project_automation_prototype_sa_policy" {
+  location    = google_cloud_run_service.github_project_automation_prototype.location
+  service     = google_cloud_run_service.github_project_automation_prototype.name
+  policy_data = data.google_iam_policy.github_project_automation_prototype_invoker.policy_data
+}
