@@ -134,9 +134,5 @@ resource "google_cloud_run_service" "github_project_automation_prototype" {
   lifecycle {
     ignore_changes = [template[0].spec[0].containers[0].image]
   }
-
-  depends_on = [
-    google_secret_manager_secret_version.github_project_automation_prototype_gh_token
-  ]
 }
 
