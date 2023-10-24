@@ -123,7 +123,7 @@ resource "google_cloud_run_service" "github_project_automation_prototype" {
           value_from {
             secret_key_ref {
               name = "github-project-automation-prototype-gh-token"
-              key  = "0"
+              key  = "1"
             }
           }
         }
