@@ -103,3 +103,36 @@ resource "google_cloud_run_service" "igsr5_daily" {
   }
 }
 
+/*
+ * github-project-automation-prototype
+ * igsr5の個人向けのGitHubプロジェクト自動化ツール
+ */
+resource "google_cloud_run_service" "github_project_automation_prototype" {
+  name                       = "github-project-automation-prototype"
+  location                   = "asia-northeast1"
+  autogenerate_revision_name = true
+
+  template {
+    spec {
+      containers {
+        // NOTE: This is temporary. This will be replaced with a container image.
+        image = "us-docker.pkg.dev/cloudrun/container/hello"
+
+        env {
+          name = "GH_TOKEN"
+          value_from {
+            secret_key_ref {
+              name = "github-project-automation-prototype-gh-token"
+              key  = "0"
+            }
+          }
+        }
+      }
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [template[0].spec[0].containers[0].image]
+  }
+}
+
