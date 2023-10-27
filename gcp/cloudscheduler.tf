@@ -87,7 +87,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_issue
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_requests" {
   name             = "github-project-automation-prototype-pull-requests"
-  schedule         = "*/1 * * * *"
+  schedule         = "*/2 * * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
@@ -114,7 +114,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_review_pull_requests" {
   name             = "github-project-automation-prototype-review-pull-requests"
-  schedule         = "*/1 * * * *"
+  schedule         = "*/2 * * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
