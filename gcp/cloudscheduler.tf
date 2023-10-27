@@ -60,7 +60,7 @@ resource "google_cloud_scheduler_job" "igsr5_daily" {
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype" {
   name             = "github-project-automation-prototype"
-  schedule         = "*/3 * * * *"
+  schedule         = "*/2 * * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
