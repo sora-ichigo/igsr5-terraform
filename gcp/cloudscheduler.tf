@@ -58,9 +58,9 @@ resource "google_cloud_scheduler_job" "igsr5_daily" {
  *
  * 3分毎にGitHub Project Automationの実行を促す
  */
-resource "google_cloud_scheduler_job" "github_project_automation_prototype" {
+resource "google_cloud_scheduler_job" "github_project_automation_prototype_issues" {
   name             = "github-project-automation-prototype"
-  schedule         = "*/2 * * * *"
+  schedule         = "*/5 * * * *"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
@@ -70,7 +70,61 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype" {
 
   http_target {
     http_method = "POST"
-    uri         = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/run")
+    uri         = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/issues")
+
+    oidc_token {
+      audience              = google_cloud_run_service.github_project_automation_prototype.status[0].url
+      service_account_email = google_service_account.github_project_automation_prototype_sa.email
+    }
+  }
+}
+
+/*
+ * igsr5_daily
+ * igsr5の個人向けのGitHubプロジェクト自動化ツール
+ *
+ * 3分毎にGitHub Project Automationの実行を促す
+ */
+resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_requests" {
+  name             = "github-project-automation-prototype"
+  schedule         = "*/1 * * * *"
+  time_zone        = "Asia/Tokyo"
+  attempt_deadline = "600s"
+
+  retry_config {
+    retry_count = 1
+  }
+
+  http_target {
+    http_method = "POST"
+    uri         = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/pull_requests")
+
+    oidc_token {
+      audience              = google_cloud_run_service.github_project_automation_prototype.status[0].url
+      service_account_email = google_service_account.github_project_automation_prototype_sa.email
+    }
+  }
+}
+
+/*
+ * igsr5_daily
+ * igsr5の個人向けのGitHubプロジェクト自動化ツール
+ *
+ * 3分毎にGitHub Project Automationの実行を促す
+ */
+resource "google_cloud_scheduler_job" "github_project_automation_prototype_review_pull_requests" {
+  name             = "github-project-automation-prototype"
+  schedule         = "*/1 * * * *"
+  time_zone        = "Asia/Tokyo"
+  attempt_deadline = "600s"
+
+  retry_config {
+    retry_count = 1
+  }
+
+  http_target {
+    http_method = "POST"
+    uri         = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/review_pull_requests")
 
     oidc_token {
       audience              = google_cloud_run_service.github_project_automation_prototype.status[0].url
