@@ -60,7 +60,7 @@ resource "google_cloud_scheduler_job" "igsr5_daily" {
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_issues" {
   name             = "github-project-automation-prototype-issues"
-  schedule         = "*/5 * * * 1-5"
+  schedule         = "*/3 * * * 1-5"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
@@ -87,7 +87,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_issue
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_requests" {
   name             = "github-project-automation-prototype-pull-requests"
-  schedule         = "*/2 * * * 1-5"
+  schedule         = "*/1 * * * 1-5"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
@@ -114,7 +114,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_review_pull_requests" {
   name             = "github-project-automation-prototype-review-pull-requests"
-  schedule         = "*/2 * * * 1-5"
+  schedule         = "*/1 * * * 1-5"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
