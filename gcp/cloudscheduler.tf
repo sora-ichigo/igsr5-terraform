@@ -114,7 +114,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_pull_
  */
 resource "google_cloud_scheduler_job" "github_project_automation_prototype_review_pull_requests" {
   name             = "github-project-automation-prototype-review-pull-requests"
-  schedule         = "/3 9-18 * * 1-5"
+  schedule         = "*/3 9-18 * * 1-5"
   time_zone        = "Asia/Tokyo"
   attempt_deadline = "600s"
 
