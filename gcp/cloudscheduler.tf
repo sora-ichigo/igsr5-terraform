@@ -70,7 +70,7 @@ resource "google_cloud_scheduler_job" "github_project_automation_prototype_issue
   http_target {
     http_method = "POST"
     # 大体 5 分かかる
-    uri         = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/all")
+    uri = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/all")
 
     oidc_token {
       audience              = google_cloud_run_service.github_project_automation_prototype.status[0].url
