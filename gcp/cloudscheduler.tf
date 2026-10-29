@@ -29,30 +29,3 @@ resource "google_cloud_scheduler_job" "igsr5_daily" {
     }
   }
 }
-
-/*
- * igsr5の個人向けのGitHubプロジェクト自動化ツール
- *
- * 平日9時, 13時, 19時にGitHub Project Automationの実行を促す
- */
-resource "google_cloud_scheduler_job" "github_project_automation_prototype_issues" {
-  name             = "github-project-automation-prototype-issues"
-  schedule         = "0 9,13,19 * * 1-5"
-  time_zone        = "Asia/Tokyo"
-  attempt_deadline = "600s"
-
-  retry_config {
-    retry_count = 1
-  }
-
-  http_target {
-    http_method = "POST"
-    # 大体 5 分かかる
-    uri = format("%s%s", google_cloud_run_service.github_project_automation_prototype.status[0].url, "/all")
-
-    oidc_token {
-      audience              = google_cloud_run_service.github_project_automation_prototype.status[0].url
-      service_account_email = google_service_account.github_project_automation_prototype_sa.email
-    }
-  }
-}
